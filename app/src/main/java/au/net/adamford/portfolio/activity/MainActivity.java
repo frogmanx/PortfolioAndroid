@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,8 +96,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(PortfolioItem portfolioItem, View view) {
-        view.setTransitionName(view.getResources().getString(R.string.transition_shot));
-        view.setBackgroundColor(getResources().getColor(R.color.background_light));
+        //view.setTransitionName(view.getResources().getString(R.string.transition_shot));
+        //view.setBackgroundColor(getResources().getColor(R.color.background_light));
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(DetailActivity.ITEM, portfolioItem);
         ActivityOptions options =
@@ -164,9 +166,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onResponse(Response<List<PortfolioItem>> response, Retrofit retrofit) {
-        mPortfolioItems = new ArrayList<>(response.body());
-        mAdapter.setAddressList(mPortfolioItems);
-        Log.i(TAG,  Integer.toString(mPortfolioItems.size()));
+
+        if(response.isSuccess()&&response.body()!=null) {
+            mPortfolioItems = new ArrayList<>(response.body());
+            mAdapter.setAddressList(mPortfolioItems);
+            Log.i(TAG,  Integer.toString(mPortfolioItems.size()));
+        }
     }
 
     @Override

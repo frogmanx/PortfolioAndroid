@@ -9,10 +9,10 @@ import android.os.Parcelable;
 public class PortfolioItem implements Parcelable{
 
     public String title;
-    String url;
-    String imageUrl;
+    public String url;
+    public String imageUrl;
     public String description;
-    int type;
+    public int type;
 
     @Override
     public int describeContents() {

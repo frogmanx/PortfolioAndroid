@@ -13,8 +13,9 @@ import retrofit.http.Path;
  * Created by Adam on 17/11/2015.
  */
 public interface WebApiService {
-    @GET("/api")
+    @GET("/adam/api")
     Call<List<PortfolioItem>> getAll();
-    @GET("/api/{id}")
+    @GET("/adam/api/{id}")
     Call<List<PortfolioItem>> getPortfolioItem(@Path("id") int id);
 }
+

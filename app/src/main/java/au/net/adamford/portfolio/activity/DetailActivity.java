@@ -1,13 +1,18 @@
 package au.net.adamford.portfolio.activity;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,9 @@ public class DetailActivity extends AppCompatActivity {
     public static final String ITEM = "item";
     PortfolioItem mPortfolioItem;
     @Bind(R.id.description) TextView description;
+    @Bind(R.id.title) TextView title;
+    @Bind(R.id.image)
+    SimpleDraweeView image;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
     @Override
@@ -37,13 +45,19 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         mPortfolioItem = getIntent().getParcelableExtra(ITEM);
-        toolbar.setTitle(mPortfolioItem.title);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         description.setText(mPortfolioItem.description);
-
+        title.setText(mPortfolioItem.title);
+        toolbar.setTitle(mPortfolioItem.title);
+        if(mPortfolioItem.imageUrl!=null) {
+            Uri imageUri = Uri.parse(mPortfolioItem.imageUrl);
+            if(imageUri!=null) {
+                image.setImageURI(imageUri);
+            }
+        }
     }
 }
