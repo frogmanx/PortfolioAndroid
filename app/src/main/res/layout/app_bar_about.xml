@@ -48,15 +48,11 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent">
             <include layout="@layout/content_about" />
-
-        </LinearLayout>
+        </FrameLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

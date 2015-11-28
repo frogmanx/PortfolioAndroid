@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 def supportLibraryVersion =  "22.2.1"
-def googlePlayServicesVersion =  "7.8.0"
+def googlePlayServicesVersion =  "8.3.0"
 
 android {
     compileSdkVersion 22

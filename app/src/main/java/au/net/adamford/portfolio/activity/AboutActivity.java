@@ -26,6 +26,7 @@ import butterknife.OnClick;
 public class AboutActivity extends AppCompatActivity {
     @Bind(R.id.title) TextView title;
     @Bind(R.id.body) TextView body;
+    @Bind(R.id.contact) TextView contact;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
     @Bind(R.id.collapsing_toolbar)
@@ -41,7 +42,12 @@ public class AboutActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         title.setText("Adam Ford");
-        body.setText("Blah Blah Blah");
+        body.setText("Mobile Developer. Technology Enthusiast. Avid Gamer.");
+        contact.setText("Contact Me\n" +
+                "\n" +
+                "I can be reached via email at: adam.ford.eng@gmail.com\n" +
+                "or via phone: +61437948814.\n" +
+                "I am based in Melbourne.");
     }
 
     @Override

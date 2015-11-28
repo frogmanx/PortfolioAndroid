@@ -52,10 +52,10 @@ public class PortfolioItemHolder extends RecyclerView.ViewHolder implements View
                 break;
             }
             case 2: {
-                image.setImageResource(R.drawable.iphone);
+                image.setImageResource(R.drawable.mac);
                 break;
             }
-            case 3: {
+            case 0: {
                 image.setImageResource(R.drawable.html);
                 break;
 
