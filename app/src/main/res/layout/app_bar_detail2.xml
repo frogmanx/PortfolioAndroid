@@ -24,11 +24,10 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/melbourne"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -54,17 +53,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/content_about" />
+            <include layout="@layout/content_details" />
 
-
-            <fragment
-                android:layout_below="@id/scroll"
-                android:gravity="bottom"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/map"
-                tools:context=".MapsActivity"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -74,6 +64,6 @@
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"
         style="@style/FabStyle"
-        android:src="@drawable/ic_menu_send" />
+        android:src="@drawable/ic_folder_open_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

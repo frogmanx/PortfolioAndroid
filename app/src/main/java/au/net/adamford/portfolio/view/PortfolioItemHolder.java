@@ -1,10 +1,14 @@
 package au.net.adamford.portfolio.view;
 
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -25,7 +29,7 @@ public class PortfolioItemHolder extends RecyclerView.ViewHolder implements View
     @Bind(R.id.text_view)
     TextView textView;
     @Bind(R.id.image)
-    SimpleDraweeView image;
+    ImageView image;
 
     PortfolioItem mPortfolioItem;
     OnHolderClickListener<PortfolioItem> mOnHolderClickListener;
@@ -42,10 +46,19 @@ public class PortfolioItemHolder extends RecyclerView.ViewHolder implements View
     public void bindResult(PortfolioItem portfolioItem) {
         this.mPortfolioItem = portfolioItem;
         textView.setText(mPortfolioItem.title);
-        if(mPortfolioItem.imageUrl!=null) {
-            Uri imageUri = Uri.parse(mPortfolioItem.imageUrl);
-            if(imageUri!=null) {
-                image.setImageURI(imageUri);
+        switch(mPortfolioItem.type) {
+            case 1:{
+                image.setImageResource(R.drawable.android);
+                break;
+            }
+            case 2: {
+                image.setImageResource(R.drawable.iphone);
+                break;
+            }
+            case 3: {
+                image.setImageResource(R.drawable.html);
+                break;
+
             }
         }
     }

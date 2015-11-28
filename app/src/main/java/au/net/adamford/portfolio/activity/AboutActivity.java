@@ -1,5 +1,7 @@
 package au.net.adamford.portfolio.activity;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -50,7 +52,16 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     public void onFabClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"adam.ford.eng@gmail.com"});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+        PackageManager packageManager = getPackageManager();
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        }   else  {
+            Snackbar.make(view, "Not able to send email from this device.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 }
