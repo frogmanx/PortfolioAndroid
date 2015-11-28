@@ -23,5 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/body"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textColor="@color/white"
+        android:text="Icon supplied by icons8.com https://icons8.com/license/"/>
+
 
 </RelativeLayout>

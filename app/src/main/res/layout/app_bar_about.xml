@@ -56,15 +56,6 @@
 
             <include layout="@layout/content_about" />
 
-
-            <fragment
-                android:layout_below="@id/scroll"
-                android:gravity="bottom"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/map"
-                tools:context=".MapsActivity"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

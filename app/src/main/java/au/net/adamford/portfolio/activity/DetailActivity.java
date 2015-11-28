@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mPortfolioItem = getIntent().getParcelableExtra(ITEM);
     }
 
@@ -56,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onResume();
         description.setText(mPortfolioItem.description);
         setTitle(mPortfolioItem.title);
-
+        title.setText(mPortfolioItem.title);
         if(mPortfolioItem.imageUrl!=null) {
             Uri imageUri = Uri.parse(mPortfolioItem.imageUrl);
             if(imageUri!=null) {
@@ -72,5 +75,23 @@ public class DetailActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            // app icon in action bar clicked; goto parent activity.
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
