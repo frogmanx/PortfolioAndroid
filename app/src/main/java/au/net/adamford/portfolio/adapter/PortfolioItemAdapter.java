@@ -20,7 +20,7 @@ public class PortfolioItemAdapter extends RecyclerView.Adapter<PortfolioItemHold
     ArrayList<PortfolioItem> mPortfolioItems;
     OnHolderClickListener mOnClickListener;
     public static String TAG = "AddressAdapter";
-    public void setAddressList(ArrayList<PortfolioItem> portfolioItems) {
+    public void setList(ArrayList<PortfolioItem> portfolioItems) {
         this.mPortfolioItems = portfolioItems;
         this.notifyDataSetChanged();
     }

@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity
     ArrayList<PortfolioItem> mPortfolioItems;
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.drawer_layout) DrawerLayout drawer;
     @Bind(R.id.nav_view) NavigationView navigationView;
     PortfolioItemAdapter mAdapter;
@@ -63,12 +62,6 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         mPortfolioItems = new ArrayList<>();
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -88,11 +81,6 @@ public class MainActivity extends AppCompatActivity
         call.enqueue(this);
     }
 
-    @OnClick(R.id.fab)
-    public void onFabClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
 
     @Override
     public void onClick(PortfolioItem portfolioItem, View view) {
@@ -147,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -169,7 +157,7 @@ public class MainActivity extends AppCompatActivity
 
         if(response.isSuccess()&&response.body()!=null) {
             mPortfolioItems = new ArrayList<>(response.body());
-            mAdapter.setAddressList(mPortfolioItems);
+            mAdapter.setList(mPortfolioItems);
             Log.i(TAG,  Integer.toString(mPortfolioItems.size()));
         }
     }
