@@ -26,7 +26,8 @@ import butterknife.OnClick;
 public class AboutActivity extends AppCompatActivity {
     @Bind(R.id.title) TextView title;
     @Bind(R.id.body) TextView body;
-    @Bind(R.id.contact) TextView contact;
+    @Bind(R.id.contact1) TextView contact1;
+    @Bind(R.id.contact2) TextView contact2;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
     @Bind(R.id.collapsing_toolbar)
@@ -42,12 +43,9 @@ public class AboutActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         title.setText("Adam Ford");
-        body.setText("Mobile Developer. Technology Enthusiast. Avid Gamer.");
-        contact.setText("Contact Me\n" +
-                "\n" +
-                "I can be reached via email at: adam.ford.eng@gmail.com\n" +
-                "or via phone: +61437948814.\n" +
-                "I am based in Melbourne.");
+        body.setText("Mobile Developer from Melbourne");
+        contact1.setText("Email: adam.ford.eng@gmail.com");
+        contact2.setText("Phone: +61437948814");
     }
 
     @Override
@@ -57,7 +55,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.fab)
+    @OnClick({R.id.fab, R.id.contact1})
     public void onFabClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -72,7 +70,12 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
-
+    @OnClick(R.id.contact2)
+    public void goToPhone() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:+61437948814"));
+        startActivity(intent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

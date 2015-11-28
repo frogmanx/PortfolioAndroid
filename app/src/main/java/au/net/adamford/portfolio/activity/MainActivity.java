@@ -32,6 +32,7 @@ import au.net.adamford.portfolio.R;
 import au.net.adamford.portfolio.adapter.PortfolioItemAdapter;
 import au.net.adamford.portfolio.model.PortfolioItem;
 import au.net.adamford.portfolio.util.OnHolderClickListener;
+import au.net.adamford.portfolio.util.PreferenceHelper;
 import au.net.adamford.portfolio.util.WebApi;
 import au.net.adamford.portfolio.view.DividerItemDecoration;
 import butterknife.Bind;
@@ -41,18 +42,20 @@ import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import uk.co.imallan.jellyrefresh.JellyRefreshLayout;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Callback<List<PortfolioItem>>, OnHolderClickListener<PortfolioItem> {
+        implements NavigationView.OnNavigationItemSelectedListener, Callback<List<PortfolioItem>>, OnHolderClickListener<PortfolioItem>, JellyRefreshLayout.JellyRefreshListener {
 
     ArrayList<PortfolioItem> mPortfolioItems;
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.drawer_layout) DrawerLayout drawer;
     @Bind(R.id.nav_view) NavigationView navigationView;
+    @Bind(R.id.loading) JellyRefreshLayout jellyRefreshLayout;
     PortfolioItemAdapter mAdapter;
     LinearLayoutManager mLinearLayoutManager;
-
+    Call<List<PortfolioItem>> mCall;
     public static final String TAG = "MainActivity";
 
     @Override
@@ -61,8 +64,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        mPortfolioItems = new ArrayList<>();
-
+        mPortfolioItems = PreferenceHelper.getPortfolioItems(this);
+        mCall = WebApi.getWebApiService().getAll();
+        jellyRefreshLayout.setRefreshListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -144,9 +148,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onResponse(Response<List<PortfolioItem>> response, Retrofit retrofit) {
-
+        jellyRefreshLayout.finishRefreshing();
         if(response.isSuccess()&&response.body()!=null) {
             mPortfolioItems = new ArrayList<>(response.body());
+            PreferenceHelper.storePortfolioItems(mPortfolioItems, this);
             mAdapter.setList(mPortfolioItems);
             Log.i(TAG,  Integer.toString(mPortfolioItems.size()));
         }
@@ -154,7 +159,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFailure(Throwable t) {
-
+        jellyRefreshLayout.finishRefreshing();
     }
 
+    @Override
+    public void onRefresh(JellyRefreshLayout jellyRefreshLayout) {
+        mCall.cancel();
+        mCall = WebApi.getWebApiService().getAll();
+        mCall.enqueue(this);
+    }
 }
