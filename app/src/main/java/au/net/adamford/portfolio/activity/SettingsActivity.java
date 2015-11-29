@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import butterknife.OnClick;
  */
 public class SettingsActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) Toolbar toolbar;
-
+    @Bind(R.id.cached) Switch cached;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,11 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Settings");
+    }
+
+    public void onResume() {
+        super.onResume();
+        cached.setChecked(PreferenceHelper.isCachedEnabled(this));
     }
 
     @OnClick(R.id.clear)
