@@ -64,7 +64,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        mPortfolioItems = PreferenceHelper.getPortfolioItems(this);
+        if(PreferenceHelper.isCachedEnabled(this)) {
+            mPortfolioItems = PreferenceHelper.getPortfolioItems(this);
+        }
+        else {
+            mPortfolioItems = new ArrayList<>();
+        }
         mCall = WebApi.getWebApiService().getAll();
         jellyRefreshLayout.setRefreshListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -141,6 +146,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.about) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
         }
+        else if (id == R.id.settings) {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -151,7 +159,9 @@ public class MainActivity extends AppCompatActivity
         jellyRefreshLayout.finishRefreshing();
         if(response.isSuccess()&&response.body()!=null) {
             mPortfolioItems = new ArrayList<>(response.body());
-            PreferenceHelper.storePortfolioItems(mPortfolioItems, this);
+            if(PreferenceHelper.isCachedEnabled(this)) {
+                PreferenceHelper.storePortfolioItems(mPortfolioItems, this);
+            }
             mAdapter.setList(mPortfolioItems);
             Log.i(TAG,  Integer.toString(mPortfolioItems.size()));
         }

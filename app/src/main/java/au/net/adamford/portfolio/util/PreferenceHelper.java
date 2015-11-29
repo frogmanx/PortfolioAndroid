@@ -16,6 +16,19 @@ import au.net.adamford.portfolio.model.PortfolioItem;
 public class PreferenceHelper {
     public static String SHARED_PREFERENCES_KEY = "sharedpreferences";
     public static String PORTFOLIO_ITEMS_KEY = "portfolioitems";
+    public static String CACHE_ENABLED = "cacheenabled";
+
+    public static void setCacheEnabled(boolean cacheEnabled, Context context) {
+        storeObject(cacheEnabled, context, new TypeToken<Boolean>(){}, CACHE_ENABLED);
+    }
+
+    public static boolean isCachedEnabled(Context context) {
+        Boolean b = (Boolean) getObject(context, new TypeToken<Boolean>(){}, CACHE_ENABLED);
+        if(b!=null) {
+            return b.booleanValue();
+        }
+        return true;
+    }
 
     public static void storePortfolioItems(ArrayList<PortfolioItem> portfolioItemArrayList, Context context) {
         storeObject(portfolioItemArrayList, context, new TypeToken<ArrayList<PortfolioItem>>(){}, PORTFOLIO_ITEMS_KEY);

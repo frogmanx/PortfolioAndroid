@@ -12,6 +12,7 @@ public class PortfolioItem implements Parcelable{
     public String url;
     public String imageUrl;
     public String description;
+    public String packageUri;
     public int type;
 
     @Override
@@ -25,6 +26,7 @@ public class PortfolioItem implements Parcelable{
         dest.writeString(this.url);
         dest.writeString(this.imageUrl);
         dest.writeString(this.description);
+        dest.writeString(this.packageUri);
         dest.writeInt(this.type);
     }
 
@@ -36,6 +38,7 @@ public class PortfolioItem implements Parcelable{
         this.url = in.readString();
         this.imageUrl = in.readString();
         this.description = in.readString();
+        this.packageUri = in.readString();
         this.type = in.readInt();
     }
 

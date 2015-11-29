@@ -1,13 +1,16 @@
 package au.net.adamford.portfolio.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,6 +46,8 @@ public class DetailActivity extends AppCompatActivity {
     SimpleDraweeView header;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
+    public static final String TAG = "DetailActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +76,26 @@ public class DetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     public void onClick() {
-        String url = mPortfolioItem.url;
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+        if(!openApp(this, mPortfolioItem.packageUri)) {
+            String url = mPortfolioItem.url;
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
     }
 
+    public boolean openApp(Context context, String packageName) {
+        Log.i(TAG, "Opening package: " + packageName);
+        if(packageName==null) return false;
+        PackageManager manager = context.getPackageManager();
+        Intent i = manager.getLaunchIntentForPackage(packageName);
+        if (i == null) {
+            return false;
+        }
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        context.startActivity(i);
+        return true;
+    }
 
 
     @Override
