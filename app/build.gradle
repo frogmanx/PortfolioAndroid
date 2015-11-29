@@ -15,7 +15,15 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "EMAIL_ADDRESS", emailAddress
+            buildConfigField "String", "EMAIL_SUBJECT", emailSubject
+            buildConfigField "String", "PHONE_NUMBER", phoneNumber
+        }
         release {
+            buildConfigField "String", "EMAIL_ADDRESS", emailAddress
+            buildConfigField "String", "EMAIL_SUBJECT", emailSubject
+            buildConfigField "String", "PHONE_NUMBER", phoneNumber
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

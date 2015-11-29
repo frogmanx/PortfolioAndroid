@@ -5,6 +5,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <!--About-->
+    <string name="icon_reference">Icon supplied by icons8.com https://icons8.com/license/</string>
+    <string name="telephone">tel:</string>
+    <string name="no_email">Not able to send email from this device.</string>
+    <string name="send_email">Send Email</string>
+    <string name="email">Email: </string>
+    <string name="phone">Phone: </string>
+    <string name="about_body">Mobile Developer from Melbourne</string>
+    <string name="title">Adam Ford</string>
+
+    <!--Settings-->
+    <string name="clear_cache">Clear cache</string>
+    <string name="allow_cache">Allow cached data</string>
 
 
     <string name="transition_shot" translatable="false">shot</string>

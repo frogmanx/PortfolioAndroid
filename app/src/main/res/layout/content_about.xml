@@ -66,7 +66,7 @@
         android:textAppearance="@android:style/TextAppearance.Small"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:textColor="@color/white"
-        android:text="Icon supplied by icons8.com https://icons8.com/license/"/>
+        android:text="@string/icon_reference"/>
 
 
 </RelativeLayout>

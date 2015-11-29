@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import au.net.adamford.portfolio.BuildConfig;
 import au.net.adamford.portfolio.R;
 import au.net.adamford.portfolio.model.PortfolioItem;
 import butterknife.Bind;
@@ -42,10 +43,10 @@ public class AboutActivity extends AppCompatActivity {
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        title.setText("Adam Ford");
-        body.setText("Mobile Developer from Melbourne");
-        contact1.setText("Email: adam.ford.eng@gmail.com");
-        contact2.setText("Phone: +61437948814");
+        title.setText(getResources().getString(R.string.title));
+        body.setText(getResources().getString(R.string.about_body));
+        contact1.setText(getResources().getString(R.string.email) + BuildConfig.EMAIL_ADDRESS);
+        contact2.setText(getResources().getString(R.string.phone) + BuildConfig.PHONE_NUMBER);
     }
 
     @Override
@@ -59,13 +60,13 @@ public class AboutActivity extends AppCompatActivity {
     public void onFabClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"adam.ford.eng@gmail.com"});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+        intent.putExtra(Intent.EXTRA_EMAIL  , new String[]{BuildConfig.EMAIL_ADDRESS});
+        intent.putExtra(Intent.EXTRA_SUBJECT, BuildConfig.EMAIL_SUBJECT);
         PackageManager packageManager = getPackageManager();
         if (intent.resolveActivity(packageManager) != null) {
-            startActivity(Intent.createChooser(intent, "Send Email"));
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.send_email)));
         }   else  {
-            Snackbar.make(view, "Not able to send email from this device.", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, getResources().getString(R.string.no_email), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }
@@ -73,7 +74,7 @@ public class AboutActivity extends AppCompatActivity {
     @OnClick(R.id.contact2)
     public void goToPhone() {
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:+61437948814"));
+        intent.setData(Uri.parse(getResources().getString(R.string.telephone)+BuildConfig.PHONE_NUMBER));
         startActivity(intent);
     }
 
