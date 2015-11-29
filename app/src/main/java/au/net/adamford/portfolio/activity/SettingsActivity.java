@@ -3,6 +3,7 @@ package au.net.adamford.portfolio.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.CompoundButton;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Settings");
     }
 
     @OnClick(R.id.clear)
@@ -38,5 +40,18 @@ public class SettingsActivity extends AppCompatActivity {
     @OnCheckedChanged(R.id.cached)
     public void toggleCache(CompoundButton toggle, boolean cache) {
         PreferenceHelper.setCacheEnabled(cache, this);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@+id/toolbar">
+    android:layout_below="@+id/appbar"
+    android:padding="@dimen/activity_horizontal_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Switch
+        android:id="@+id/cached"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="@color/white"
+        android:text="Allow cached data"/>
+
     <Button
         android:id="@+id/clear"
+        android:layout_below="@+id/cached"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Clear cache"/>
-    <ToggleButton
-        android:id="@+id/cached"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Allow cached data"/>
-</LinearLayout>
+</RelativeLayout>
