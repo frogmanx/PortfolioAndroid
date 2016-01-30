@@ -5,6 +5,7 @@ import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import java.util.logging.Level;
 
+import au.net.adamford.portfolio.BuildConfig;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -23,7 +24,7 @@ public class WebApi {
         // add logging as last interceptor
         httpClient.interceptors().add(logging);  // <-- this is the important line!
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.adamford.net.au:8080")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient)
                 .build();

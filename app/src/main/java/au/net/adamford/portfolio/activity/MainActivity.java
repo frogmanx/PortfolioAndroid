@@ -86,6 +86,19 @@ public class MainActivity extends AppCompatActivity
         mLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(PreferenceHelper.isCachedEnabled(this)) {
+            mPortfolioItems = PreferenceHelper.getPortfolioItems(this);
+        }
+        else {
+            mPortfolioItems = new ArrayList<>();
+        }
+        mAdapter.setList(mPortfolioItems);
         Call<List<PortfolioItem>> call = WebApi.getWebApiService().getAll();
         call.enqueue(this);
     }

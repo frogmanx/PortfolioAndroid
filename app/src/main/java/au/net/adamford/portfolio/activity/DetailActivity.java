@@ -69,7 +69,6 @@ public class DetailActivity extends AppCompatActivity {
             Uri imageUri = Uri.parse(mPortfolioItem.imageUrl);
             if(imageUri!=null) {
                 header.setImageURI(imageUri);
-                //image.setImageURI(imageUri);
             }
         }
     }
